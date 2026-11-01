@@ -1,98 +1,89 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, StyleSheet, Text, View } from "react-native";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function Index() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+    <View style={styles.container}>
+      <Image source={require("../../assets/images/icon.png")} style={styles.logo} />
+      <Text style={styles.title}>Campus Spots</Text>
+      <Text style={styles.subtitle}>Edited for Task 1</Text>
+      <View style={styles.card}>
+        <Text style={styles.name}>Isaac González</Text>
+        <Text style={styles.description}>I come from León, Spain and I study Computer Science</Text>
+      <Text style={styles.description}>My favourite place in my home town is the park called "Parque San Isidro" where I go to disconnect</Text>
+      </View>
+      <View style={styles.squares}>
+        <View style={styles.square1}></View>
+        <View style={styles.square2}></View>
+        <View style={styles.square3}></View>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#3d0049",
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  logo: {
+    width: 96,
+    height: 96,
+    marginBottom: 16,
   },
   title: {
-    textAlign: 'center',
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#ffffff",
   },
-  code: {
-    textTransform: 'uppercase',
+  subtitle: {
+    marginTop: 4,
+    fontSize: 16,
+    color: "#cdcedf",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  card: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#690283",
+    borderRadius: 12,
+    padding: 10,
+    marginTop: 24,
+    marginHorizontal: 20,
+  }, 
+  name: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 8,
+    color: "#00fa36",
   },
+  description: {
+    fontSize: 14,
+    color: "#569c5a",
+    textAlign: "center",
+  },
+  squares: {
+    backgroundColor: "#fffeff",
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 8,
+    
+  },
+  square1: {
+    width: 50,
+    height: 50,
+    backgroundColor: "#ff0000",
+  }, 
+  square2: {
+    width: 50,
+    height: 50,
+    backgroundColor: "#00b7ff",
+    flex: 1,
+  },
+  square3: {
+    width: 50,
+    height: 50,
+    backgroundColor: "#d0ff00",
+  }
 });
